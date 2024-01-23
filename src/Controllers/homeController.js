@@ -14,4 +14,13 @@ router.get('/404', (req, res) => {
     res.render('404');
 });
 
+router.get("/search", (req, res) => {
+    let movies = movieService.getAll();
+
+    const { title, genre, year } = req.query;
+    movies = movieService.findMovies(title, genre, year)
+
+    res.render("search", { movies });
+});
+
 module.exports = router;
