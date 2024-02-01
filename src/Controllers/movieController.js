@@ -24,7 +24,7 @@ router.get("/details/:detailsId", async (req, res) => {
 
     movie.rating = new Array(Number(movie.rating)).fill(true);
 
-    res.render('details', { movie })
+    res.render('details2', { movie })
 });
 
 router.get("/movies/:movieId/attach", async (req, res) => {
