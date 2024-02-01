@@ -9,7 +9,7 @@ exports.create = (movieData) => {
 }
 
 exports.getOne = (movieId) => {
-  return Movie.findById(movieId);
+  return Movie.findById(movieId).populate('casts');
 };
 
 exports.findMovies = async (title, genre, year) => {
