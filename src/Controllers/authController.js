@@ -12,8 +12,10 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
     const userData = req.body;
 
-    await authService.createUser(userData);
+    await authService.register(userData);
     res.redirect('/auth/login');
+});
+
 })
 
 module.exports = router;
