@@ -7,7 +7,7 @@
                 <h1>{{movie.title}}</h1>
                 <div class="card-movie">
                     <div class="first-info">
-                        <p class="card-genre">Genre: {{move.genre}}</p>
+                        <p class="card-genre">Genre: {{movie.genre}}</p>
                         <p class="card-director">Directror: {{movie.director}}</p>
                     </div>
                     <div class="second-info">
@@ -20,8 +20,8 @@
                 <p class="disc">Description: {{movie.description}}</p>
             </div>
             <div class="details-btn">
-                <button id="edit-button">Edit</button>
-                <button id="delete-button">Delete</button>
+                <a href="/movies/{{movie._id}}/edit" id="edit-button">Edit</a>
+                <a href="#" id="delete-button">Delete</a>
             </div>
         </div>
         <div class="card_right">

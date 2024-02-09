@@ -26,5 +26,5 @@ exports.findMovies = async (title, genre, year) => {
   return movies;
 };
 exports.attach = async (movieId, castId) => {
-  return Movie,Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
+  return Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
 }
