@@ -37,8 +37,6 @@ router.post("/movies/:movieId/attach", async (req, res) => {
     const castId = req.body.cast;
     const movieId = req.params.movieId;
 
-    console.log(req.body);
-
     await movieService.attach(movieId, castId);
 
     res.redirect(`/movies/${movieId}/attach`);
@@ -47,8 +45,16 @@ router.post("/movies/:movieId/attach", async (req, res) => {
 router.get("/movies/:movieId/edit", async (req, res) => {
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId).lean();
-    console.log(movie);
-    res.render("edit", {movie})
+    res.render("edit", { movie })
 });
+
+router.post("/movies/:movieId/edit", async (req, res) => {
+    const movieId = req.params.movieId;
+    const movieData = req.body;
+
+    await movieService.edit(movieId, movieData);
+
+    res.redirect(`/details/${movieId}`);
+})
 
 module.exports = router;
