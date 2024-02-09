@@ -29,6 +29,6 @@ exports.attach = async (movieId, castId) => {
   return Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
 };
 
-exports.edit = async (movieId, movie) => {
+exports.edit = (movieId, movie) => {
   return Movie.findByIdAndUpdate(movieId, movie);
 }
