@@ -39,13 +39,17 @@ router.post("/movies/:movieId/attach", async (req, res) => {
 
     await movieService.attach(movieId, castId);
 
-    res.redirect(`/movies/${movieId}/attach`);
+    res.redirect(`/details/${movieId}/attach`);
 });
 
 router.get("/movies/:movieId/edit", async (req, res) => {
     const movieId = req.params.movieId;
     const movie = await movieService.getOne(movieId).lean();
-    console.log(movie);
+
+    if(!req.user) {
+        return res.redirect("/auth/login");
+    }
+
     res.render("edit", { movie })
 });
 

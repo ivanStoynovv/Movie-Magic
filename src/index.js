@@ -6,6 +6,8 @@ const routes = require('./router');
 const mongoose = require('mongoose');
 const cookieParser = require("cookie-parser");
 
+const {auth} = require("./middlewares/authMiddleware");
+
 
 const port = 3030;
 
@@ -18,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser());
+app.use(auth)
 
 app.use(routes)
 

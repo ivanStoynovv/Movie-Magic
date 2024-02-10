@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const jwt = require("../lib/jwt");
-
-const SECRET = 'gut%$#&675r55$#SS5d7uu754S#S##Wi67(**';
+const {SECRET} = require("../config/config");
 
 exports.register = async (userData) => {
     const user =await User.findOne({email: userData.email});
@@ -28,7 +27,7 @@ exports.login = async (email, password) => {
         email: user.email,
     }
 
-    const token = await jwt.sign(payload, SECRET, {expiresIn: '2h'});
+    const token = await jwt.sign(payload, SECRET, {expiresIn: '2s'});
 
     return token;
 }
