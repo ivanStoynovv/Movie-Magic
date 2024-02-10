@@ -11,9 +11,12 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
     const userData = req.body;
-
-    await authService.register(userData);
-    res.redirect('/auth/login');
+    try {
+        await authService.register(userData);
+        res.redirect('/auth/login');
+    } catch (err) {
+       res.render("register", {error: err.message});
+    }
 });
 
 router.post("/login", async (req, res) => {
@@ -22,7 +25,7 @@ router.post("/login", async (req, res) => {
     const token = await authService.login(email, password);
 
     res.cookie('auth', token);
-    
+
     res.redirect('/');
 });
 

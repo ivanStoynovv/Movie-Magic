@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const movieService = require('../services/movieService');
 const castService = require('../services/castService');
-const {isAuth} = require("../middlewares/authMiddleware");
+const { isAuth } = require("../middlewares/authMiddleware");
 
 router.get('/create', isAuth, (req, res) => {
     res.render('create')
@@ -25,7 +25,7 @@ router.post('/create', isAuth, async (req, res) => {
 router.get("/details/:detailsId", async (req, res) => {
     const movieId = req.params.detailsId;
     const movie = await movieService.getOne(movieId).lean();
-    const isOwner = movie.owner == req.user?._id;
+    const isOwner = movie.owner && movie.owner == req.user?._id;
 
     movie.rating = new Array(Number(movie.rating)).fill(true);
 
@@ -62,6 +62,11 @@ router.post("/movies/:movieId/edit", isAuth, async (req, res) => {
     await movieService.edit(movieId, movieData);
 
     res.redirect(`/details/${movieId}`);
+});
+
+router.get("/movies/:movieId/delete", isAuth, async (req, res) => {
+    await movieService.delete(req.params.movieId);
+    res.redirect("/");
 })
 
 module.exports = router;
